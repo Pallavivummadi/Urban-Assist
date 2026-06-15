@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@android:drawable/ic_menu_today"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_transport"
+            android:icon="@android:drawable/ic_dialog_map"
+            android:title="Transport" />
+        <item
+            android:id="@+id/nav_tasks"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Tasks &amp; Goals" />
+        <item
+            android:id="@+id/nav_bills"
+            android:icon="@android:drawable/ic_menu_save"
+            android:title="Bills &amp; Payments" />
+    </group>
+
+    <item android:title="CITY SERVICES">
+        <menu>
+            <item
+                android:id="@+id/nav_nearby"
+                android:icon="@android:drawable/ic_menu_mylocation"
+                android:title="Nearby" />
+            <item
+                android:id="@+id/nav_emergency"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="Emergency" />
+            <item
+                android:id="@+id/nav_environment"
+                android:icon="@android:drawable/ic_menu_gallery"
+                android:title="@string/environment" />
+            <item
+                android:id="@+id/nav_gov"
+                android:icon="@android:drawable/ic_menu_set_as"
+                android:title="@string/gov_services" />
+            <item
+                android:id="@+id/nav_location"
+                android:icon="@android:drawable/ic_menu_mylocation"
+                android:title="@string/my_location_title" />
+        </menu>
+    </item>
+
+    <item android:title="ACCOUNT">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="Settings" />
+        </menu>
+    </item>
+</menu>

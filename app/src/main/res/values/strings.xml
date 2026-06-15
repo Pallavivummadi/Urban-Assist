@@ -1,0 +1,369 @@
+<resources>
+    <string name="app_name">UrbanAssist</string>
+    <string name="app_subtitle">SMART CITY CONCIERGE</string>
+    <string name="app_manager">SMART CITY LIFE MANAGER</string>
+
+    <!-- Login/Register -->
+    <string name="welcome_back">Welcome back</string>
+    <string name="access_dashboard">Access your urban dashboard</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="email_hint">citizen@urban.assist</string>
+    <string name="password_hint">........</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">Login</string>
+    <string name="or_continue">OR CONTINUE WITH</string>
+    <string name="google">Google</string>
+    <string name="apple">Apple</string>
+    <string name="new_to_city">New to the city? </string>
+    <string name="register">Register</string>
+    <string name="join_city">Join the city</string>
+    <string name="create_account">Create your citizen account</string>
+    <string name="full_name">Full Name</string>
+    <string name="name_hint">John Doe</string>
+    <string name="already_citizen">Already a citizen? </string>
+
+    <!-- Forgot Password -->
+    <string name="reset_password">Reset Password</string>
+    <string name="reset_instructions">Enter your email to receive reset instructions</string>
+    <string name="send_instructions">Send Instructions</string>
+    <string name="back_to_login">Back to Login</string>
+
+    <!-- Dashboard -->
+    <string name="overview">OVERVIEW</string>
+    <string name="greeting">Good Evening, Pallavi 🟠</string>
+    <string name="search_hint">Search city services...</string>
+    <string name="tasks_today">TASKS TODAY</string>
+    <string name="air_quality">AIR QUALITY</string>
+    <string name="bills_due">BILLS DUE</string>
+    <string name="next_bus">NEXT BUS</string>
+    <string name="completed_status">↑ 3 completed</string>
+    <string name="aqi_status">Good - PM2.5</string>
+    <string name="overdue_status">! 2 overdue</string>
+    <string name="bus_status">Route 23A - On time</string>
+    <string name="bus_time">6 min</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="transport">Transport</string>
+    <string name="pay_bills">Pay Bills</string>
+    <string name="food">Food</string>
+    <string name="emergency">Emergency</string>
+    <string name="todays_tasks">Today\'s Tasks</string>
+    <string name="view_all">View all</string>
+    <string name="city_events">City Events</string>
+    <string name="priority_high">High</string>
+
+    <!-- Transport Page -->
+    <string name="live_city_transit">Live City Transit</string>
+    <string name="metro">Metro</string>
+    <string name="bus">Bus</string>
+    <string name="cab_auto">Cab / Auto</string>
+    <string name="bike_share">Bike Share</string>
+    <string name="journey_planner">Journey Planner</string>
+    <string name="from_hint">From: Ambattur Station</string>
+    <string name="to_hint">To: Central Station</string>
+    <string name="plan_route">Plan Route</string>
+    <string name="live_metro_status">Live Metro Status</string>
+    <string name="live">Live</string>
+    <string name="live_metro_map">Live Metro Map — Chennai OMRL</string>
+    <string name="on_time">On time</string>
+    <string name="min_delay">min delay</string>
+    <string name="nearby_bus_routes">Nearby Bus Routes</string>
+    <string name="min_late">min late</string>
+    <string name="route_23a">Route 23A - Ambattur → Broadway</string>
+    <string name="route_23a_stop">Stop: Ambattur OT - Moderate</string>
+    <string name="route_70">Route 70 - Ambattur → T Nagar</string>
+    <string name="route_70_stop">Stop: MTH Road - Light</string>
+    <string name="route_15c">Route 15C - Ambattur → Airport</string>
+    <string name="route_15c_stop">Stop: IAF Gate - Heavy</string>
+
+    <!-- Bills Page -->
+    <string name="bills_payments">BILLS &amp; PAYMENTS</string>
+    <string name="track_pay_bills">Track &amp; Pay City Bills</string>
+    <string name="paid_this_month">PAID THIS MONTH</string>
+    <string name="due_soon">DUE SOON</string>
+    <string name="overdue">OVERDUE</string>
+    <string name="add_bill">+ Add Bill</string>
+    <string name="all_bills">All Bills</string>
+    <string name="pay">Pay</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="paid">Paid</string>
+    <string name="due">Due</string>
+
+    <!-- Unique Feature: UrbanSaver -->
+    <string name="urbansaver_insight">UrbanSaver Insight</string>
+    <string name="predicted_next">Predicted Next Month</string>
+    <string name="eco_points">Eco-Points Earned</string>
+    <string name="smart_tip">Smart Tip: Shift heavy appliance usage to 10PM–6AM to save 15% on electricity!</string>
+    <string name="split_bill">🔗 Split with roommate</string>
+    <string name="predicted_amount">₹12,850</string>
+    <string name="eco_points_amount">1,450 pts</string>
+    <string name="desc_info">Information Icon</string>
+
+    <!-- Nearby / Food Page -->
+    <string name="nearby">NEARBY</string>
+    <string name="places_around">Places Around You</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="shops">Shops</string>
+    <string name="gov_offices">Gov. Offices</string>
+    <string name="restaurants_nearby">RESTAURANTS NEARBY</string>
+    <string name="map_label">Restaurants near Ambattur</string>
+    <string name="hospital_map_label">Hospitals near your current location</string>
+    <string name="detecting_location">Detecting your location...</string>
+    <string name="location_detected">Restaurants near your current location</string>
+    <string name="hospitals_detected">Hospitals near your current location</string>
+    <string name="hospitals_nearby_title">HOSPITALS NEARBY</string>
+
+    <!-- Unique Feature: MedTrack -->
+    <string name="medtrack_title">MedTrack Live Availability</string>
+    <string name="icu_beds">ICU Beds Available</string>
+    <string name="emergency_wait">Avg. ER Wait Time</string>
+    <string name="blood_stock">O+ Blood Stock</string>
+    <string name="desc_live">LIVE</string>
+
+    <!-- Emergency Page -->
+    <string name="emergency_services">Quick Access to Services</string>
+    <string name="emergency_note">Tap to call - All calls are free on Indian networks</string>
+    <string name="police">Police</string>
+    <string name="police_num">100 / 112</string>
+    <string name="fire_brigade">Fire Brigade</string>
+    <string name="fire_num">101</string>
+    <string name="ambulance">Ambulance</string>
+    <string name="ambulance_num">108</string>
+    <string name="disaster_mgmt">Disaster Mgmt</string>
+    <string name="disaster_num">1078</string>
+    <string name="poison_control">Poison Control</string>
+    <string name="poison_num">1800-11-6117</string>
+    <string name="traffic_police">Traffic Police</string>
+    <string name="traffic_num">103</string>
+    <string name="send_sos">Send SOS Alert</string>
+    <string name="sos_desc">Sends your live location + emergency message to your 3 saved contacts.</string>
+    <string name="sos_hint">Describe your emergency...</string>
+    <string name="btn_send_sos">Send SOS</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+    <string name="add_contact">+ Add</string>
+
+    <!-- Unique Feature: Guardian Shield -->
+    <string name="guardian_shield">Guardian Shield</string>
+    <string name="guardian_desc">One-tap medical profile share for first responders</string>
+    <string name="share_profile">Share Medical ID</string>
+
+    <!-- Weather / Environment Page -->
+    <string name="environment">ENVIRONMENT</string>
+    <string name="weather_aqi">Weather &amp; Air Quality</string>
+    <string name="current_weather">Current Weather</string>
+    <string name="aqi_index">Air Quality Index</string>
+    <string name="noise_map">Noise Pollution Map</string>
+    <string name="temp_34">34°C</string>
+    <string name="weather_desc">Partly Cloudy - Feels like 39°C</string>
+    <string name="location_detail">Ambattur, Tamil Nadu</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind NE</string>
+    <string name="visibility">Visibility</string>
+    <string name="five_day_forecast">5-DAY FORECAST</string>
+    <string name="aqi_good_desc">Good — Air quality is satisfactory. Suitable for outdoor activities.</string>
+    <string name="noise_label">Real-time Noise Levels — Ambattur Zone</string>
+    <string name="weather">Weather</string>
+
+    <!-- Tasks Page -->
+    <string name="tasks_goals">TASKS &amp; GOALS</string>
+    <string name="manage_daily_life">Manage Your Daily Life</string>
+    <string name="add_new_task">Add New Task</string>
+    <string name="task_hint">Enter task description...</string>
+    <string name="add_task">+ Add Task</string>
+    <string name="pending_tasks">Pending Tasks</string>
+    <string name="completed">Completed</string>
+    <string name="pending_count">4 pending</string>
+    <string name="done">Done</string>
+    <string name="priority_med">Med</string>
+
+    <string-array name="priority_levels">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+
+    <!-- Gov Services Page -->
+    <string name="gov_services">Gov. Services</string>
+    <string name="city_gov_portal">City Government Portal</string>
+    <string name="active_applications">ACTIVE APPLICATIONS</string>
+    <string name="verified_citizen">Verified Citizen Profile</string>
+    <string name="apply_new">Apply for Service</string>
+    <string name="ration_card">Ration Card Renewal</string>
+    <string name="voter_id">Voter ID Update</string>
+    <string name="property_tax_portal">Property Tax Portal</string>
+    <string name="status_pending">In Progress</string>
+    <string name="status_verified">Verified</string>
+    <string name="aadhaar_linked">AADHAAR LINKED: XXXX-XXXX-4567</string>
+    <string name="ref_id">Ref ID: CITY-98721</string>
+    <string name="processing_time">Processing — Expected 3 days</string>
+    <string name="available_portals">AVAILABLE PORTALS</string>
+    <string name="birth_death_cert">Birth/Death Cert</string>
+
+    <!-- Search Page -->
+    <string name="search">SEARCH</string>
+    <string name="search_results_title">Search Results</string>
+    <string name="all_results_count">All Results (18)</string>
+    <string name="services_count">Services (6)</string>
+    <string name="tasks_count">Tasks (6)</string>
+    <string name="bills_count">Bills &amp; Payments (3)</string>
+    <string name="info_count">Information (3)</string>
+    <string name="search_query">water</string>
+    <string name="results_found_text">18 results found for \"water\"</string>
+    <string name="filter_services">Filter by City Services</string>
+    <string name="all_categories">All Categories</string>
+    <string name="sort_relevance">Sort by Relevance</string>
+    <string name="water_tanker_title">Water Tanker Supply</string>
+    <string name="water_tanker_desc">Book a water tanker for domestic use</string>
+    <string name="water_bill_title">Water Bill Payment</string>
+    <string name="water_bill_desc">Pay your water bill online securely</string>
+    <string name="report_leak_title">Report Water Leakage</string>
+    <string name="report_leak_desc">Report water leakage or pipe burst in your area</string>
+    <string name="water_emergency">Water Emergency</string>
+    <string name="water_emergency_desc">Need immediate water assistance?</string>
+    <string name="water_quality_check">Water Quality Check</string>
+    <string name="water_quality_desc">Check water quality in your area</string>
+    <string name="related_info">Related Information</string>
+    <string name="water_tips">Water Conservation Tips</string>
+    <string name="water_schedule">Chennai Water Supply Schedule</string>
+    <string name="water_report">Water Quality Report</string>
+    <string name="view_all_info">View all information</string>
+    <string name="available">Available</string>
+    <string name="popular">Popular</string>
+    <string name="request_new">Request New</string>
+    <string name="check_new">Check New</string>
+
+    <string name="result_transport_title">City Bus Live Tracking</string>
+    <string name="result_transport_desc">Track Route 23A and other city transits</string>
+    <string name="result_hospital_title">Nearby Health Centers</string>
+    <string name="result_hospital_desc">Find emergency care and clinics near you</string>
+    <string name="result_bill_title">Electricity &amp; Water Bills</string>
+    <string name="result_bill_desc">View pending payments and history</string>
+
+    <!-- Unique Feature: UrbanWallet -->
+    <string name="urbanwallet_title">Urban Wallet Documents</string>
+    <string name="digital_aadhaar">Digital Aadhaar</string>
+    <string name="driving_license">Driving License</string>
+    <string name="ration_card_doc">Ration Card</string>
+    <string name="view_document">View Document</string>
+    <string name="notifications">Notifications</string>
+    <string name="no_new_notifications">No new notifications</string>
+    <string name="clear_all">Clear All</string>
+    <string name="recent">Recent</string>
+    <string name="earlier">Earlier</string>
+    <string name="notification_transit_title">Transit Alert</string>
+    <string name="notification_transit_desc">Blue Line metro running 5 mins late due to signal issues.</string>
+    <string name="notification_bill_title">Bill Reminder</string>
+    <string name="notification_bill_desc">Your Electricity bill (Ref: CITY-98721) is due in 2 days.</string>
+    <string name="notification_system_title">System Update</string>
+    <string name="notification_system_desc">UrbanAssist v2.0 is now live with new city services!</string>
+    <string name="notification_settings">Notification Settings</string>
+    <string name="bill_reminders">Bill Payment Reminders</string>
+    <string name="bill_reminders_desc">3 days before due date</string>
+    <string name="transport_alerts">Transport Alerts</string>
+    <string name="transport_alerts_desc">Live delays &amp; disruptions</string>
+    <string name="aqi_warnings">Air Quality Warnings</string>
+    <string name="aqi_warnings_desc">When AQI exceeds 100</string>
+    <string name="event_updates">City Event Updates</string>
+    <string name="event_updates_desc">Nearby events &amp; closures</string>
+    <string name="desc_back">Navigate back</string>
+
+    <!-- Location Page -->
+    <string name="my_location_title">My Location</string>
+    <string name="current_zone">Current Zone: Ambattur</string>
+    <string name="location_details">Your real-time coordinates and area safety index.</string>
+    <string name="safety_index">Safety Index</string>
+    <string name="safety_desc">Based on lighting, crowd, and police patrol frequency.</string>
+    <string name="live_traffic">Nearby Traffic</string>
+    <string name="low_congestion">Low Congestion</string>
+    <string name="moderate_congestion">Moderate Congestion</string>
+
+    <!-- City Events Page -->
+    <string name="city_events_title">Upcoming City Events</string>
+    <string name="event_desc">Join local initiatives and stay updated with your community.</string>
+    <string name="join_event">Register for Event</string>
+    <string name="event_category_civic">CIVIC</string>
+    <string name="event_category_tech">TECH</string>
+    <string name="event_category_health">HEALTH</string>
+    <string name="event_1_title">Marina Beach Cleanup</string>
+    <string name="event_1_loc">📍 Marina Beach, Chennai</string>
+    <string name="event_2_title">Smart City Expo 2026</string>
+    <string name="event_2_loc">📍 Trade Centre, Nandambakkam</string>
+    <string name="event_3_title">Free Health Camp</string>
+    <string name="event_3_loc">📍 Ambattur Community Hall</string>
+
+    <!-- Settings Page -->
+    <string name="profile_preferences">Profile &amp; Preferences</string>
+    <string name="profile">Profile</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="premium_member">Premium Member - Chennai</string>
+    <string name="pallavi_name">Pallavi Vummadi</string>
+    <string name="pallavi_email">pallavi.vummadi@gmail.com</string>
+    <string name="pallavi_phone">+91 98400 12345</string>
+    <string name="pallavi_address">Ambattur, Chennai – 600053</string>
+    <string name="preferences">Preferences</string>
+    <string name="language">Language</string>
+    <string name="currency">Currency</string>
+    <string name="location_services">Location Services</string>
+    <string name="location_services_desc">Used for nearby &amp; transport</string>
+    <string name="about">About</string>
+    <string name="app_version_label">App Version</string>
+    <string name="app_version_val">UrbanAssist 3.1.0</string>
+    <string name="city_label">City</string>
+    <string name="city_val">Chennai, Tamil Nadu</string>
+    <string name="data_refresh_label">Data Refresh</string>
+    <string name="data_refresh_val">Real-time</string>
+    <string name="plan_label">Plan</string>
+    <string name="plan_val">✦ Premium</string>
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Feedback Page -->
+    <string name="feedback_title">Feedback &amp; Support</string>
+    <string name="feedback_desc">Your feedback helps us build a better city concierge.</string>
+    <string name="rate_experience">Rate your experience</string>
+    <string name="comment_hint">Tell us more about your experience...</string>
+    <string name="submit_feedback">Submit Feedback</string>
+    <string name="contact_support">Contact Support</string>
+    <string name="faq">Frequently Asked Questions</string>
+    <string name="support_desc">Need help with city services? Our team is here 24/7.</string>
+    <string name="category_app">App Performance</string>
+    <string name="category_city">City Services</string>
+    <string name="category_billing">Billing &amp; Payments</string>
+    <string name="select_category">Select Category</string>
+    <string name="chat_with_us">Chat with us</string>
+
+    <string-array name="feedback_categories">
+        <item>App Performance</item>
+        <item>City Services</item>
+        <item>Billing &amp; Payments</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Landing / Welcome Page -->
+    <string name="welcome_title">Your City, Simplified.</string>
+    <string name="welcome_desc">The all-in-one digital concierge for your urban life. Manage transit, bills, and safety in one place.</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_account">Already have an account? Login</string>
+
+    <!-- Permission Page -->
+    <string name="allow_notifications_title">Allow UrbanAssist to send you notifications?</string>
+    <string name="allow">Allow</string>
+    <string name="dont_allow">Don\'t allow</string>
+
+    <!-- Location Permission Page -->
+    <string name="allow_location_title">Allow UrbanAssist to access this device’s location?</string>
+    <string name="precise">Precise</string>
+    <string name="approximate">Approximate</string>
+    <string name="while_using">While using the app</string>
+    <string name="only_this_time">Only this time</string>
+
+    <!-- Accessibility / Content Descriptions -->
+    <string name="desc_menu">Open Navigation Menu</string>
+    <string name="desc_search">Search Icon</string>
+    <string name="desc_notifications">Notifications</string>
+    <string name="desc_location">My Location</string>
+    <string name="desc_tasks">Tasks</string>
+    <string name="desc_air_quality">Air Quality Info</string>
+    <string name="desc_bills">Bills Summary</string>
+    <string name="desc_bus">Next Bus Info</string>
+</resources>

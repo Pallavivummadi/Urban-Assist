@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="bg_dark">#050810</color>
+    <color name="card_bg">#121826</color>
+    <color name="input_bg">#1C2539</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="login_btn_start">#00D2FF</color>
+    <color name="login_btn_end">#9D50BB</color>
+    <color name="divider_color">#334155</color>
+    <color name="social_btn_bg">#1C2539</color>
+
+    <!-- Dashboard Colors -->
+    <color name="dash_bg">#FDF8F1</color>
+    <color name="sidebar_bg">#1A120B</color>
+    <color name="sidebar_item_selected">#2D1F13</color>
+    <color name="accent_orange">#E67E22</color>
+    <color name="text_main">#2C3E50</color>
+    <color name="card_border">#F0E4D3</color>
+    <color name="badge_red">#E74C3C</color>
+    <color name="badge_green">#2ECC71</color>
+    <color name="btn_route_bg">#B85C38</color>
+    <color name="tab_selected_bg">#FFFFFF</color>
+    <color name="live_indicator">#27AE60</color>
+</resources>
