@@ -1,0 +1,14 @@
+{
+  "name": "urban-assist-selenium-tests",
+  "version": "1.0.0",
+  "description": "E2E Selenium tests for UrbanAssist with Excel reporting",
+  "main": "test-runner.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node test-runner.js"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.18.1",
+    "exceljs": "^4.4.0"
+  }
+}
