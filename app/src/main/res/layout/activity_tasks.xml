@@ -143,6 +143,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/taskInput"
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -153,6 +154,7 @@
                             android:textSize="13sp" />
 
                         <Spinner
+                            android:id="@+id/prioritySpinner"
                             android:layout_width="100dp"
                             android:layout_height="48dp"
                             android:layout_marginStart="12dp"
@@ -160,6 +162,7 @@
                             android:entries="@array/priority_levels" />
 
                         <Button
+                            android:id="@+id/addTaskButton"
                             android:layout_width="wrap_content"
                             android:layout_height="48dp"
                             android:layout_marginStart="12dp"
@@ -211,111 +214,13 @@
                         </RelativeLayout>
 
                         <LinearLayout
+                            android:id="@+id/pendingTasksContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:orientation="vertical">
 
-                            <!-- Task Item 1 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Renew vehicle insurance"
-                                    android:textColor="@color/sidebar_bg"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:background="@drawable/priority_tag_bg"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="@string/priority_high"
-                                    android:textColor="@color/badge_red"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
-                            <!-- Task Item 2 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Pay electricity bill"
-                                    android:textColor="@color/sidebar_bg"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:background="@drawable/priority_tag_bg"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="@string/priority_high"
-                                    android:textColor="@color/badge_red"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
-                            <!-- Task Item 3 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Book metro pass renewal"
-                                    android:textColor="@color/sidebar_bg"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:background="@drawable/priority_tag_bg"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="@string/priority_med"
-                                    android:textColor="#F1C40F"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
-                            <!-- Task Item 4 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="File property tax online"
-                                    android:textColor="@color/sidebar_bg"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:background="@drawable/priority_tag_bg"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="2dp"
-                                    android:text="@string/priority_med"
-                                    android:textColor="#F1C40F"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
+                            <!-- Dynamic items will be added here -->
                         </LinearLayout>
                     </LinearLayout>
 
@@ -337,80 +242,13 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/completedTasksContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:orientation="vertical">
 
-                            <!-- Completed Item 1 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:text="Submit ration card documents"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:text="@string/done"
-                                    android:textColor="@color/badge_green"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
-                            <!-- Completed Item 2 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:text="Visit water board office"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:text="@string/done"
-                                    android:textColor="@color/badge_green"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
-                            <!-- Completed Item 3 -->
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingVertical="8dp">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:text="Update Aadhaar address"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="13sp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:text="@string/done"
-                                    android:textColor="@color/badge_green"
-                                    android:textSize="10sp"
-                                    tools:ignore="SmallSp" />
-                            </RelativeLayout>
-
+                            <!-- Dynamic items will be added here -->
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

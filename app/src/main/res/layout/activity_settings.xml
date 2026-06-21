@@ -142,6 +142,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/saveChangesButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -152,6 +153,8 @@
                             android:textColor="@color/white"
                             android:textSize="10sp"
                             android:textStyle="bold"
+                            android:clickable="true"
+                            android:focusable="true"
                             tools:ignore="SmallSp" />
                     </RelativeLayout>
 
@@ -163,6 +166,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/avatarInitials"
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/tab_layout_bg"
@@ -179,6 +183,7 @@
                             android:layout_marginStart="16dp"
                             android:orientation="vertical">
                             <TextView
+                                android:id="@+id/nameLabel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/pallavi_name"
@@ -195,6 +200,7 @@
                     </LinearLayout>
 
                     <EditText
+                        android:id="@+id/nameInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="20dp"
@@ -202,9 +208,11 @@
                         android:backgroundTint="#FDF8F1"
                         android:paddingHorizontal="16dp"
                         android:text="@string/pallavi_name"
+                        android:inputType="textPersonName"
                         android:textSize="14sp" />
 
                     <EditText
+                        android:id="@+id/emailInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="12dp"
@@ -212,9 +220,11 @@
                         android:backgroundTint="#FDF8F1"
                         android:paddingHorizontal="16dp"
                         android:text="@string/pallavi_email"
+                        android:inputType="textEmailAddress"
                         android:textSize="14sp" />
 
                     <EditText
+                        android:id="@+id/phoneInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="12dp"
@@ -222,9 +232,11 @@
                         android:backgroundTint="#FDF8F1"
                         android:paddingHorizontal="16dp"
                         android:text="@string/pallavi_phone"
+                        android:inputType="phone"
                         android:textSize="14sp" />
 
                     <EditText
+                        android:id="@+id/addressInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="12dp"
@@ -232,6 +244,7 @@
                         android:backgroundTint="#FDF8F1"
                         android:paddingHorizontal="16dp"
                         android:text="@string/pallavi_address"
+                        android:inputType="textPostalAddress"
                         android:textSize="14sp" />
                 </LinearLayout>
 

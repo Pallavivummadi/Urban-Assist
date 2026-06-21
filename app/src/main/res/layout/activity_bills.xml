@@ -146,16 +146,18 @@
                             android:textSize="10sp"
                             tools:ignore="SmallSp" />
                         <TextView
+                            android:id="@+id/paidAmountVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="₹11,450"
+                            android:text="₹0"
                             android:textColor="@color/sidebar_bg"
                             android:textSize="20sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/paidCountVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5 bills paid"
+                            android:text="0 bills paid"
                             android:textColor="@color/badge_green"
                             android:textSize="10sp"
                             tools:ignore="SmallSp" />
@@ -180,16 +182,18 @@
                             android:textSize="10sp"
                             tools:ignore="SmallSp" />
                         <TextView
+                            android:id="@+id/dueAmountVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="₹2,340"
+                            android:text="₹0"
                             android:textColor="@color/sidebar_bg"
                             android:textSize="20sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/dueCountVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2 bills pending"
+                            android:text="0 bills pending"
                             android:textColor="@color/accent_orange"
                             android:textSize="10sp"
                             tools:ignore="SmallSp" />
@@ -214,16 +218,18 @@
                             android:textSize="10sp"
                             tools:ignore="SmallSp" />
                         <TextView
+                            android:id="@+id/overdueAmountVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="₹900"
+                            android:text="₹0"
                             android:textColor="@color/sidebar_bg"
                             android:textSize="20sp"
                             android:textStyle="bold" />
                         <TextView
+                            android:id="@+id/overdueCountVal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 bill overdue"
+                            android:text="0 bill overdue"
                             android:textColor="@color/badge_red"
                             android:textSize="10sp"
                             tools:ignore="SmallSp" />
@@ -340,6 +346,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
                     <TextView
+                        android:id="@+id/addBillButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -348,213 +355,20 @@
                         android:paddingVertical="4dp"
                         android:text="@string/add_bill"
                         android:textColor="@color/sidebar_bg"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:clickable="true"
+                        android:focusable="true" />
                 </RelativeLayout>
 
                 <!-- Bills List -->
                 <LinearLayout
+                    android:id="@+id/billsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:orientation="vertical">
 
-                    <!-- Bill 1 -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dash_card_bg"
-                        android:padding="16dp"
-                        android:layout_marginBottom="12dp">
-                        <ImageView
-                            android:id="@+id/icon1"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_agenda"
-                            android:padding="6dp"
-                            android:background="@drawable/priority_tag_bg"
-                            app:tint="#F1C40F"
-                            android:contentDescription="Electricity" />
-                        <LinearLayout
-                            android:id="@+id/billContent1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/icon1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TNEB Electricity Bill"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Due: 15 May 2026"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="12dp"
-                                android:text="₹1,280\nDue"
-                                android:gravity="end"
-                                android:textColor="@color/sidebar_bg"
-                                android:textSize="12sp" />
-                            <Button
-                                android:layout_width="60dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/route_button_bg"
-                                android:text="@string/pay"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/billContent1"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginStart="44dp"
-                            android:text="@string/split_bill"
-                            android:textColor="@color/accent_orange"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:clickable="true"
-                            android:focusable="true"
-                            tools:ignore="SmallSp" />
-                    </RelativeLayout>
-
-                    <!-- Bill 2 (Overdue) -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dash_card_bg"
-                        android:padding="16dp"
-                        android:layout_marginBottom="12dp">
-                        <ImageView
-                            android:id="@+id/icon2"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_save"
-                            android:padding="6dp"
-                            android:background="@drawable/priority_tag_bg"
-                            app:tint="@color/badge_red"
-                            android:contentDescription="Water" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/icon2"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="CMWSSB Water Bill"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Due: 10 May 2026"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="12dp"
-                                android:text="₹900\nOverdue"
-                                android:gravity="end"
-                                android:textColor="@color/badge_red"
-                                android:textSize="12sp" />
-                            <Button
-                                android:layout_width="80dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/route_button_bg"
-                                android:text="@string/pay_now"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <!-- Bill 3 -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dash_card_bg"
-                        android:padding="16dp"
-                        android:layout_marginBottom="12dp">
-                        <ImageView
-                            android:id="@+id/icon3"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_call"
-                            android:padding="6dp"
-                            android:background="@drawable/priority_tag_bg"
-                            app:tint="#2ECC71"
-                            android:contentDescription="Mobile" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/icon3"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jio Mobile Postpaid"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Due: 20 May 2026"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:gravity="end"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="12dp"
-                                android:text="₹1,060\nDue"
-                                android:gravity="end"
-                                android:textColor="@color/sidebar_bg"
-                                android:textSize="12sp" />
-                            <Button
-                                android:layout_width="60dp"
-                                android:layout_height="32dp"
-                                android:background="@drawable/route_button_bg"
-                                android:text="@string/pay"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                    </RelativeLayout>
+                    <!-- Dynamic items will be added here -->
 
                 </LinearLayout>
 

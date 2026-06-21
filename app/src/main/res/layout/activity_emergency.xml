@@ -434,99 +434,11 @@
 
                 <!-- Contact List -->
                 <LinearLayout
+                    android:id="@+id/contactsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dash_card_bg"
-                        android:padding="16dp"
-                        android:layout_marginBottom="12dp">
-                        <ImageView
-                            android:id="@+id/contact1"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_myplaces"
-                            android:padding="6dp"
-                            android:background="@drawable/priority_tag_bg"
-                            app:tint="#1ABC9C"
-                            android:contentDescription="Father" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/contact1"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Ravi Kumar (Father)"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+91 98401 12345"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@android:drawable/ic_menu_call"
-                            app:tint="#1ABC9C"
-                            android:contentDescription="Call" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/dash_card_bg"
-                        android:padding="16dp">
-                        <ImageView
-                            android:id="@+id/contact2"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_myplaces"
-                            android:padding="6dp"
-                            android:background="@drawable/priority_tag_bg"
-                            app:tint="#E67E22"
-                            android:contentDescription="Mother" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/contact2"
-                            android:layout_marginStart="12dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Meena Devi (Mother)"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+91 94450 67890"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
-                        </LinearLayout>
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@android:drawable/ic_menu_call"
-                            app:tint="#1ABC9C"
-                            android:contentDescription="Call" />
-                    </RelativeLayout>
                 </LinearLayout>
 
             </LinearLayout>

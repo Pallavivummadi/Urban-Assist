@@ -82,57 +82,13 @@
                     tools:ignore="SmallSp" />
 
                 <LinearLayout
+                    android:id="@+id/recentNotificationsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/dash_card_bg"
                     android:orientation="vertical"
                     android:padding="8dp">
-
-                    <!-- Notification 2 -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-                        <ImageView
-                            android:id="@+id/notifIcon2"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/priority_tag_bg"
-                            android:backgroundTint="#FFF9E6"
-                            android:padding="10dp"
-                            android:src="@android:drawable/ic_menu_agenda"
-                            app:tint="#F1C40F" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/notifIcon2"
-                            android:layout_marginStart="16dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/notification_bill_title"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="@string/notification_bill_desc"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="1 hour ago"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="10sp"
-                                tools:ignore="SmallSp" />
-                        </LinearLayout>
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <!-- Earlier Section -->
@@ -147,57 +103,13 @@
                     tools:ignore="SmallSp" />
 
                 <LinearLayout
+                    android:id="@+id/earlierNotificationsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/dash_card_bg"
                     android:orientation="vertical"
                     android:padding="8dp">
-
-                    <!-- Notification 3 -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-                        <ImageView
-                            android:id="@+id/notifIcon3"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/priority_tag_bg"
-                            android:backgroundTint="#F4ECF7"
-                            android:padding="10dp"
-                            android:src="@android:drawable/ic_menu_set_as"
-                            app:tint="#8E44AD" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/notifIcon3"
-                            android:layout_marginStart="16dp"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/notification_system_title"
-                                android:textColor="@color/sidebar_bg"
-                                android:textStyle="bold"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="@string/notification_system_desc"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="Yesterday"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="10sp"
-                                tools:ignore="SmallSp" />
-                        </LinearLayout>
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <!-- Notification Preferences Section -->

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/dialogTitleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bill Title (e.g. Electricity, Water)"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/dialogAmountInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount (₹)"
+        android:layout_marginTop="12dp"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/dialogCategoryInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category (e.g. Electricity, Water, Mobile)"
+        android:layout_marginTop="12dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/dialogDateInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Due Date (e.g. 2026-06-30)"
+        android:layout_marginTop="12dp"
+        android:inputType="date" />
+</LinearLayout>

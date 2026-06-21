@@ -7,6 +7,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.builtin.Email
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +24,26 @@ class LoginActivity : AppCompatActivity() {
         val forgotPasswordTextView = findViewById<TextView>(R.id.forgotPasswordTextView)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                Toast.makeText(this, "Logging in to UrbanAssist...", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LocationPermissionActivity::class.java)
-                startActivity(intent)
-                finish()
+                loginButton.isEnabled = false
+                lifecycleScope.launch {
+                    try {
+                        SupabaseManager.client.auth.signInWith(Email) {
+                            this.email = email
+                            this.password = password
+                        }
+                        Toast.makeText(this@LoginActivity, "Login Successful!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@LoginActivity, LocationPermissionActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } catch (e: Exception) {
+                        loginButton.isEnabled = true
+                        Toast.makeText(this@LoginActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             } else {
                 Toast.makeText(this, "Please enter your credentials", Toast.LENGTH_SHORT).show()
             }

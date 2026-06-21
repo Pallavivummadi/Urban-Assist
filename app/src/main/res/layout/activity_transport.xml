@@ -151,6 +151,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tabCab"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -160,6 +161,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tabBike"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -194,6 +196,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/plannerFromInput"
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -209,6 +212,7 @@
                             android:layout_height="match_parent" />
 
                         <EditText
+                            android:id="@+id/plannerToInput"
                             android:layout_width="0dp"
                             android:layout_height="48dp"
                             android:layout_weight="1"
@@ -224,6 +228,7 @@
                             android:layout_height="match_parent" />
 
                         <Button
+                            android:id="@+id/btnPlanRoute"
                             android:layout_width="wrap_content"
                             android:layout_height="48dp"
                             android:background="@drawable/route_button_bg"
@@ -273,19 +278,11 @@
 
                         <!-- Metro Items -->
                         <LinearLayout
+                            android:id="@+id/metroListContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:orientation="vertical">
-                            <!-- Simplified Metro Item -->
-                            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/search_bg" android:backgroundTint="#FDF8F1" android:padding="12dp">
-                                <ImageView android:id="@+id/mIcon1" android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/priority_tag_bg" android:padding="6dp" android:src="@android:drawable/ic_dialog_map" app:tint="@color/btn_route_bg" android:contentDescription="Metro" />
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_toEndOf="@id/mIcon1" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Blue Line - Wimco Nagar → Airport" android:textColor="@color/sidebar_bg" android:textStyle="bold" android:textSize="14sp" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Platform 1 - 8 coaches" android:textColor="@color/text_secondary" android:textSize="12sp" />
-                                </LinearLayout>
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="3 min\nOn time" android:gravity="end" android:textColor="@color/sidebar_bg" android:textSize="12sp" />
-                            </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -321,50 +318,89 @@
                             android:textStyle="bold" />
 
                         <LinearLayout
+                            android:id="@+id/busListContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:orientation="vertical">
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
 
-                            <!-- Bus Item 1 -->
-                            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/search_bg" android:backgroundTint="#FDF8F1" android:padding="12dp" android:layout_marginBottom="8dp">
-                                <ImageView android:id="@+id/bIcon1" android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/priority_tag_bg" android:padding="6dp" android:src="@android:drawable/ic_dialog_map" app:tint="#27AE60" android:contentDescription="Bus" />
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_toEndOf="@id/bIcon1" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/route_23a" android:textColor="@color/sidebar_bg" android:textStyle="bold" android:textSize="14sp" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/route_23a_stop" android:textColor="@color/text_secondary" android:textSize="11sp" />
-                                </LinearLayout>
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:gravity="end" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6 min" android:textColor="@color/sidebar_bg" android:textStyle="bold" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/on_time" android:textColor="@color/badge_green" android:textSize="10sp" tools:ignore="SmallSp" />
-                                </LinearLayout>
-                            </RelativeLayout>
+                <!-- Cab Status Section -->
+                <LinearLayout
+                    android:id="@+id/cabSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                            <!-- Bus Item 2 -->
-                            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/search_bg" android:backgroundTint="#FDF8F1" android:padding="12dp" android:layout_marginBottom="8dp">
-                                <ImageView android:id="@+id/bIcon2" android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/priority_tag_bg" android:padding="6dp" android:src="@android:drawable/ic_dialog_map" app:tint="#27AE60" android:contentDescription="Bus" />
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_toEndOf="@id/bIcon2" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/route_70" android:textColor="@color/sidebar_bg" android:textStyle="bold" android:textSize="14sp" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/route_70_stop" android:textColor="@color/text_secondary" android:textSize="11sp" />
-                                </LinearLayout>
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:gravity="end" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11 min" android:textColor="@color/sidebar_bg" android:textStyle="bold" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/on_time" android:textColor="@color/badge_green" android:textSize="10sp" tools:ignore="SmallSp" />
-                                </LinearLayout>
-                            </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:background="@drawable/dash_card_bg"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                            <!-- Bus Item 3 -->
-                            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/search_bg" android:backgroundTint="#FDF8F1" android:padding="12dp">
-                                <ImageView android:id="@+id/bIcon3" android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/priority_tag_bg" android:padding="6dp" android:src="@android:drawable/ic_dialog_map" app:tint="#27AE60" android:contentDescription="Bus" />
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_toEndOf="@id/bIcon3" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/route_15c" android:textColor="@color/sidebar_bg" android:textStyle="bold" android:textSize="14sp" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/route_15c_stop" android:textColor="@color/text_secondary" android:textSize="11sp" />
-                                </LinearLayout>
-                                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:gravity="end" android:orientation="vertical">
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18 min" android:textColor="@color/sidebar_bg" android:textStyle="bold" />
-                                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5 min late" android:textColor="@color/accent_orange" android:textSize="10sp" tools:ignore="SmallSp" />
-                                </LinearLayout>
-                            </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cab &amp; Auto Options"
+                            android:textColor="@color/sidebar_bg"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
+                        <LinearLayout
+                            android:id="@+id/cabListContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="vertical">
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnBookAuto"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/route_button_bg"
+                            android:text="Book Nearest Auto"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Bike Status Section -->
+                <LinearLayout
+                    android:id="@+id/bikeSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:background="@drawable/dash_card_bg"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cycle &amp; Bike Share"
+                            android:textColor="@color/sidebar_bg"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/bikeListContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="vertical">
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

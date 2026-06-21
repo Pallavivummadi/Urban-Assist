@@ -15,7 +15,7 @@ class LandingActivity : AppCompatActivity() {
         val loginLink = findViewById<TextView>(R.id.loginLink)
 
         getStartedButton.setOnClickListener {
-            startActivity(Intent(this, PermissionsActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         loginLink.setOnClickListener {

@@ -7,6 +7,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.builtin.Email
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,21 +26,46 @@ class RegisterActivity : AppCompatActivity() {
         val loginTextView = findViewById<TextView>(R.id.loginTextView)
 
         registerButton.setOnClickListener {
-            val name = nameEditText.text.toString()
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val name = nameEditText.text.toString().trim()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
             if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                Toast.makeText(this, "Account created for $name", Toast.LENGTH_SHORT).show()
-                // Proceed with registration logic
-                finish() // Go back to login
+                if (password.length < 6) {
+                    Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                
+                registerButton.isEnabled = false
+                lifecycleScope.launch {
+                    try {
+                        // Sign up user with additional metadata for the database trigger
+                        SupabaseManager.client.auth.signUpWith(Email) {
+                            this.email = email
+                            this.password = password
+                            data = buildJsonObject {
+                                put("full_name", name)
+                            }
+                        }
+                        
+                        Toast.makeText(this@RegisterActivity, "Registration Successful! You can now login.", Toast.LENGTH_LONG).show()
+                        
+                        // Navigate back to Login
+                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                        finish()
+                    } catch (e: Exception) {
+                        registerButton.isEnabled = true
+                        Toast.makeText(this@RegisterActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
         loginTextView.setOnClickListener {
-            finish() // Return to LoginActivity
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }

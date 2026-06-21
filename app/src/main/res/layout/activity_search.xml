@@ -52,13 +52,13 @@
                     app:tint="@color/text_secondary" />
 
                 <EditText
+                    android:id="@+id/searchQueryInput"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:autofillHints="none"
                     android:background="@null"
                     android:hint="@string/search_hint"
-                    android:text="@string/search_query"
                     android:inputType="text"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -211,6 +211,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/resultsFoundText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -230,6 +231,7 @@
 
                     <!-- Services Section -->
                     <RelativeLayout
+                        android:id="@+id/servicesHeaderLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
@@ -249,6 +251,7 @@
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/servicesListContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -258,6 +261,7 @@
 
                         <!-- Service 1: Transport -->
                         <RelativeLayout
+                            android:id="@+id/resultTransport"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="12dp">
@@ -309,6 +313,7 @@
 
                         <!-- Service 2: Hospital -->
                         <RelativeLayout
+                            android:id="@+id/resultHospital"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="12dp">
@@ -359,6 +364,7 @@
 
                     <!-- Tasks Section -->
                     <RelativeLayout
+                        android:id="@+id/tasksHeaderLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp">
@@ -379,6 +385,7 @@
                     </RelativeLayout>
 
                     <LinearLayout
+                        android:id="@+id/tasksListContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -435,8 +442,42 @@
                         </RelativeLayout>
                     </LinearLayout>
 
+                    <!-- Bills Section -->
+                    <RelativeLayout
+                        android:id="@+id/billsHeaderLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bills &amp; Payments"
+                            android:textColor="@color/sidebar_bg"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/viewAllBills"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="@string/view_all"
+                            android:textColor="@color/accent_orange"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/billsListContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/dash_card_bg"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+                    </LinearLayout>
+
                     <!-- Related Information Section -->
                     <TextView
+                        android:id="@+id/infoHeaderText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
@@ -446,6 +487,7 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/infoListContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"

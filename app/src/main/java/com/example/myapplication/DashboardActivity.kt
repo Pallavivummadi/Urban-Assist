@@ -4,38 +4,52 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.navigation.NavigationView
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.postgrest.postgrest
+import kotlinx.coroutines.launch
 
 class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+        val user = SupabaseManager.client.auth.currentUserOrNull()
+        if (user == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val menuButton = findViewById<ImageView>(R.id.menuButton)
         val searchContainer = findViewById<View>(R.id.searchContainer)
         val notificationButton = findViewById<ImageView>(R.id.notificationButton)
         val locationButton = findViewById<ImageView>(R.id.locationButton)
-        val viewAllEvents = findViewById<View>(R.id.viewAllEvents)
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
         
-        val transportAction = findViewById<View>(R.id.transportAction)
-        val payBillsAction = findViewById<View>(R.id.payBillsAction)
-        val foodAction = findViewById<View>(R.id.foodAction)
-        val weatherAction = findViewById<View>(R.id.weatherAction)
-        val myTasksAction = findViewById<View>(R.id.myTasksAction)
-        val hospitalAction = findViewById<View>(R.id.hospitalAction)
-        val govServicesAction = findViewById<View>(R.id.govServicesAction)
-        val emergencyAction = findViewById<View>(R.id.emergencyAction)
+        val greetingText = findViewById<TextView>(R.id.greetingText)
         
-        val aqiCard = findViewById<View>(R.id.aqiCard)
-        val tasksCard = findViewById<View>(R.id.tasksCard)
+        greetingText.text = "Hello, ${user.email?.substringBefore("@") ?: "User"}"
 
-        // Open drawer
+        setupNavigation(drawerLayout, menuButton, searchContainer, notificationButton, locationButton, navigationView)
+        fetchDashboardData()
+    }
+
+    private fun setupNavigation(
+        drawerLayout: DrawerLayout,
+        menuButton: ImageView,
+        searchContainer: View,
+        notificationButton: ImageView,
+        locationButton: ImageView,
+        navigationView: NavigationView
+    ) {
         menuButton.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
@@ -52,64 +66,109 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, LocationActivity::class.java))
         }
 
-        // Quick Actions
-        transportAction.setOnClickListener {
+        findViewById<View>(R.id.transportAction).setOnClickListener {
             startActivity(Intent(this, TransportActivity::class.java))
         }
         
-        payBillsAction.setOnClickListener {
+        findViewById<View>(R.id.payBillsAction).setOnClickListener {
             startActivity(Intent(this, BillsActivity::class.java))
         }
 
-        foodAction.setOnClickListener {
+        findViewById<View>(R.id.foodAction).setOnClickListener {
             startActivity(Intent(this, NearbyActivity::class.java))
         }
 
-        weatherAction.setOnClickListener {
+        findViewById<View>(R.id.weatherAction).setOnClickListener {
             startActivity(Intent(this, EnvironmentActivity::class.java))
         }
 
-        myTasksAction.setOnClickListener {
+        findViewById<View>(R.id.myTasksAction).setOnClickListener {
             startActivity(Intent(this, TasksActivity::class.java))
         }
 
-        hospitalAction.setOnClickListener {
+        findViewById<View>(R.id.hospitalAction).setOnClickListener {
             startActivity(Intent(this, HospitalActivity::class.java))
         }
 
-        govServicesAction.setOnClickListener {
+        findViewById<View>(R.id.govServicesAction).setOnClickListener {
             startActivity(Intent(this, GovServicesActivity::class.java))
         }
 
-        emergencyAction.setOnClickListener {
+        findViewById<View>(R.id.emergencyAction).setOnClickListener {
             startActivity(Intent(this, EmergencyActivity::class.java))
         }
 
-        aqiCard.setOnClickListener {
+        findViewById<View>(R.id.aqiCard).setOnClickListener {
             startActivity(Intent(this, EnvironmentActivity::class.java))
         }
 
-        tasksCard.setOnClickListener {
+        findViewById<View>(R.id.tasksCard).setOnClickListener {
             startActivity(Intent(this, TasksActivity::class.java))
         }
 
-        // Handle sidebar item clicks
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_dashboard -> Toast.makeText(this, "Already on Dashboard", Toast.LENGTH_SHORT).show()
-                R.id.nav_transport -> startActivity(Intent(this, TransportActivity::class.java))
-                R.id.nav_bills -> startActivity(Intent(this, BillsActivity::class.java))
-                R.id.nav_nearby -> startActivity(Intent(this, NearbyActivity::class.java))
-                R.id.nav_emergency -> startActivity(Intent(this, EmergencyActivity::class.java))
-                R.id.nav_environment -> startActivity(Intent(this, EnvironmentActivity::class.java))
-                R.id.nav_tasks -> startActivity(Intent(this, TasksActivity::class.java))
-                R.id.nav_gov -> startActivity(Intent(this, GovServicesActivity::class.java))
-                R.id.nav_location -> startActivity(Intent(this, LocationActivity::class.java))
-                R.id.nav_settings -> startActivity(Intent(this, SettingsActivity::class.java))
-                else -> Toast.makeText(this, "Opening ${menuItem.title}...", Toast.LENGTH_SHORT).show()
+                R.id.nav_logout -> {
+                    lifecycleScope.launch {
+                        SupabaseManager.client.auth.signOut()
+                        startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                        finish()
+                    }
+                }
+                else -> {
+                    val activityClass = when (menuItem.itemId) {
+                        R.id.nav_transport -> TransportActivity::class.java
+                        R.id.nav_bills -> BillsActivity::class.java
+                        R.id.nav_nearby -> NearbyActivity::class.java
+                        R.id.nav_emergency -> EmergencyActivity::class.java
+                        R.id.nav_environment -> EnvironmentActivity::class.java
+                        R.id.nav_tasks -> TasksActivity::class.java
+                        R.id.nav_gov -> GovServicesActivity::class.java
+                        R.id.nav_location -> LocationActivity::class.java
+                        R.id.nav_settings -> SettingsActivity::class.java
+                        else -> null
+                    }
+                    activityClass?.let { startActivity(Intent(this, it)) }
+                }
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             true
+        }
+    }
+
+    private fun fetchDashboardData() {
+        val user = SupabaseManager.client.auth.currentUserOrNull() ?: return
+        
+        lifecycleScope.launch {
+            try {
+                // Fetch Tasks Count
+                val tasks = SupabaseManager.client.postgrest["tasks"].select {
+                    filter {
+                        eq("user_id", user.id)
+                        eq("is_completed", false)
+                    }
+                }.decodeList<Task>()
+                findViewById<TextView>(R.id.taskCountVal).text = tasks.size.toString()
+                
+                // Fetch Bills Total
+                val bills = SupabaseManager.client.postgrest["bills"].select {
+                    filter {
+                        eq("user_id", user.id)
+                        eq("status", "Pending")
+                    }
+                }.decodeList<Bill>()
+                findViewById<TextView>(R.id.billsTotalVal).text = "₹${bills.sumOf { it.amount }}"
+
+                // Fetch Environment Data
+                val envData = SupabaseManager.client.postgrest["environment_data"].select().decodeSingleOrNull<EnvironmentData>()
+                envData?.let {
+                    findViewById<TextView>(R.id.aqiVal).text = it.aqi.toString()
+                }
+                
+            } catch (e: Exception) {
+                // Ignore errors or log them
+            }
         }
     }
 

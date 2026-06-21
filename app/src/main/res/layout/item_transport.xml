@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/search_bg"
+    android:backgroundTint="#FDF8F1"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp">
+
+    <ImageView
+        android:id="@+id/transportIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/priority_tag_bg"
+        android:padding="6dp"
+        android:src="@android:drawable/ic_dialog_map"
+        app:tint="@color/btn_route_bg"
+        android:contentDescription="Transit" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@id/transportIcon"
+        android:layout_toStartOf="@id/statusContainer"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/transportTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Route Name"
+            android:textColor="@color/sidebar_bg"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+        
+        <TextView
+            android:id="@+id/transportDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/statusContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="end"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/transportTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6 min"
+            android:textColor="@color/sidebar_bg"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+        
+        <TextView
+            android:id="@+id/transportStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On time"
+            android:textColor="@color/badge_green"
+            android:textSize="10sp" />
+    </LinearLayout>
+</RelativeLayout>
