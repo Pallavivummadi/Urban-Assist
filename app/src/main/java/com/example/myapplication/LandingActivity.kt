@@ -10,7 +10,14 @@ import io.github.jan.supabase.auth.auth
 class LandingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
+        // Check if user is already signed in — skip landing and go to Dashboard
+        val currentUser = SupabaseManager.client.auth.currentUserOrNull()
+        if (currentUser != null) {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+            return
+        }
 
         setContentView(R.layout.activity_landing)
 
