@@ -109,7 +109,8 @@ jobs:
           script: |
             echo "Starting Appium Server..."
             cd appium-tests
-            npx appium --port 4723 &
+            npx appium --port 4723 > appium.log 2>&1 &
+            APPIUM_PID=$!
             # Wait for port 4723 to respond using a curl loop
             for i in {1..30}; do
               if curl -s http://127.0.0.1:4723/status > /dev/null; then
@@ -121,6 +122,8 @@ jobs:
             echo "Emulator started successfully. Running tests..."
             export APK_PATH="${GITHUB_WORKSPACE}/app/build/outputs/apk/debug/app-debug.apk"
             npm test
+            echo "Stopping Appium Server..."
+            kill $APPIUM_PID || true
 
       - name: Upload Appium Excel Report
         uses: actions/upload-artifact@v4
