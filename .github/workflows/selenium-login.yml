@@ -83,7 +83,7 @@ jobs:
         working-directory: appium-tests
         run: |
           npm install
-          npx appium driver install uiautomator2
+          npx appium driver install uiautomator2 || true
 
       - name: Build Android APK
         run: |
