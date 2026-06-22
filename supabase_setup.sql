@@ -34,10 +34,53 @@ CREATE TABLE public.tasks (
   title TEXT NOT NULL,
   description TEXT,
   due_date TIMESTAMP WITH TIME ZONE,
+  due_at TIMESTAMP WITH TIME ZONE, -- for Web compatibility
   is_completed BOOLEAN DEFAULT FALSE,
+  completed BOOLEAN DEFAULT FALSE, -- for Web compatibility
+  completed_at TIMESTAMP WITH TIME ZONE, -- for Web compatibility
+  reminder_at TIMESTAMP WITH TIME ZONE, -- for Web compatibility
+  category TEXT DEFAULT 'general', -- for Web compatibility
   priority TEXT DEFAULT 'Medium',
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
 );
+
+-- Trigger to sync Android and Web task columns
+CREATE OR REPLACE FUNCTION sync_task_columns()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF TG_OP = 'INSERT' THEN
+    IF NEW.is_completed IS NOT NULL AND NEW.completed IS NULL THEN
+      NEW.completed := NEW.is_completed;
+    ELSIF NEW.completed IS NOT NULL AND NEW.is_completed IS NULL THEN
+      NEW.is_completed := NEW.completed;
+    END IF;
+
+    IF NEW.due_date IS NOT NULL AND NEW.due_at IS NULL THEN
+      NEW.due_at := NEW.due_date;
+    ELSIF NEW.due_at IS NOT NULL AND NEW.due_date IS NULL THEN
+      NEW.due_date := NEW.due_at;
+    END IF;
+  ELSE
+    IF NEW.is_completed IS DISTINCT FROM OLD.is_completed THEN
+      NEW.completed := NEW.is_completed;
+    ELSIF NEW.completed IS DISTINCT FROM OLD.completed THEN
+      NEW.is_completed := NEW.completed;
+    END IF;
+
+    IF NEW.due_date IS DISTINCT FROM OLD.due_date THEN
+      NEW.due_at := NEW.due_date;
+    ELSIF NEW.due_at IS DISTINCT FROM OLD.due_at THEN
+      NEW.due_date := NEW.due_at;
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER trg_sync_task_columns
+  BEFORE INSERT OR UPDATE ON public.tasks
+  FOR EACH ROW EXECUTE FUNCTION sync_task_columns();
 
 -- Enable RLS for tasks
 ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;

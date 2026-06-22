@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +20,36 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val localProperties = Properties()
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { stream ->
+            localProperties.load(stream)
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            val storeFilePath = localProperties.getProperty("signing.storeFilePath")
+            val storePasswordVal = localProperties.getProperty("signing.storePassword")
+            val keyAliasVal = localProperties.getProperty("signing.keyAlias")
+            val keyPasswordVal = localProperties.getProperty("signing.keyPassword")
+
+            if (storeFilePath != null && storePasswordVal != null && keyAliasVal != null && keyPasswordVal != null) {
+                storeFile = file(storeFilePath)
+                storePassword = storePasswordVal
+                keyAlias = keyAliasVal
+                keyPassword = keyPasswordVal
+            } else {
+                val debugSigning = signingConfigs.getByName("debug")
+                storeFile = debugSigning.storeFile
+                storePassword = debugSigning.storePassword
+                keyAlias = debugSigning.keyAlias
+                keyPassword = debugSigning.keyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,6 +57,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
