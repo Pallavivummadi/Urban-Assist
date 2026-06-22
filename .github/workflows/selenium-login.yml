@@ -1,0 +1,185 @@
+name: selenium-login.yml
+
+on:
+  push:
+    branches: [ main, master, dev, development ]
+  pull_request:
+    branches: [ main, master, dev, development ]
+
+# Required permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  selenium_tests:
+    name: Selenium E2E Web + API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install App Dependencies
+        working-directory: city-flow-assist-main
+        run: npm install
+
+      - name: Install Test Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Start App Server in Background
+        working-directory: city-flow-assist-main
+        run: npm run dev &
+        env:
+          SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID || 'zicbsxcbcsrblszuppbb' }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_bUk1f0B0TGXwmROeMePHfw_rwHyx9Pl' }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://zicbsxcbcsrblszuppbb.supabase.co' }}
+          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID || 'zicbsxcbcsrblszuppbb' }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_bUk1f0B0TGXwmROeMePHfw_rwHyx9Pl' }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://zicbsxcbcsrblszuppbb.supabase.co' }}
+          VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY: ${{ secrets.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY || 'AIzaSyBmvJph4LmrbtW7skeczzpBIyb9WWzFKo4' }}
+          VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID: ${{ secrets.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID || '566b6895293055817bb4c582651f4064' }}
+
+      - name: Wait for App to be Ready
+        run: npx wait-on http://localhost:8080 --timeout 60000
+
+      - name: Run E2E Selenium Tests
+        working-directory: selenium-tests
+        run: npm test
+
+      - name: Upload Excel Test Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selenium-test-report
+          path: selenium-tests/test-report.xlsx
+
+  appium_tests:
+    name: Appium Mobile Tests Driver
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Appium Dependencies
+        working-directory: appium-tests
+        run: |
+          npm install
+          npx appium driver install uiautomator2
+
+      - name: Build Android APK
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Start Appium Server
+        working-directory: appium-tests
+        run: npx appium &
+
+      - name: Run Android Emulator and Execute Tests
+        uses: ReactiveCircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          profile: pixel_7
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            echo "Emulator started successfully. Running tests..."
+            export APK_PATH="${GITHUB_WORKSPACE}/app/build/outputs/apk/debug/app-debug.apk"
+            cd appium-tests
+            npm test
+
+      - name: Upload Appium Excel Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: appium-test-report
+          path: appium-tests/test-report.xlsx
+
+  deploy_pages:
+    name: Deploy to GitHub Pages
+    needs: selenium_tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install and Build Web App
+        working-directory: city-flow-assist-main
+        run: |
+          npm install
+          npm run build
+        env:
+          SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID || 'zicbsxcbcsrblszuppbb' }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_bUk1f0B0TGXwmROeMePHfw_rwHyx9Pl' }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://zicbsxcbcsrblszuppbb.supabase.co' }}
+          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID || 'zicbsxcbcsrblszuppbb' }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_bUk1f0B0TGXwmROeMePHfw_rwHyx9Pl' }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://zicbsxcbcsrblszuppbb.supabase.co' }}
+          VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY: ${{ secrets.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY || 'AIzaSyBmvJph4LmrbtW7skeczzpBIyb9WWzFKo4' }}
+          VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID: ${{ secrets.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID || '566b6895293055817bb4c582651f4064' }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './city-flow-assist-main/dist'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+
+  generate_report:
+    name: Generate UrbanAssist Test Report
+    needs: [selenium_tests, appium_tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Selenium Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: selenium-test-report
+          path: final-reports/selenium
+
+      - name: Download Appium Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: appium-test-report
+          path: final-reports/appium
+
+      - name: Zip Reports
+        run: |
+          cd final-reports
+          zip -r final-test-reports.zip .
+
+      - name: Upload Final Consolidated Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-test-reports
+          path: final-reports/final-test-reports.zip
