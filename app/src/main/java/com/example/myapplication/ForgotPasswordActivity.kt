@@ -6,6 +6,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import io.github.jan.supabase.auth.auth
+import kotlinx.coroutines.launch
 
 class ForgotPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,12 +20,20 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val backToLoginTextView = findViewById<TextView>(R.id.backToLoginTextView)
 
         resetButton.setOnClickListener {
-            val email = emailEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
 
             if (email.isNotEmpty()) {
-                Toast.makeText(this, "Reset link sent to $email", Toast.LENGTH_LONG).show()
-                // Proceed with reset logic
-                finish()
+                resetButton.isEnabled = false
+                lifecycleScope.launch {
+                    try {
+                        SupabaseManager.client.auth.resetPasswordForEmail(email)
+                        Toast.makeText(this@ForgotPasswordActivity, "Reset link sent to $email", Toast.LENGTH_LONG).show()
+                        finish()
+                    } catch (e: Exception) {
+                        resetButton.isEnabled = true
+                        Toast.makeText(this@ForgotPasswordActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             } else {
                 Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
             }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,20 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<View>(R.id.loginButton)
         val registerTextView = findViewById<TextView>(R.id.registerTextView)
         val forgotPasswordTextView = findViewById<TextView>(R.id.forgotPasswordTextView)
+        val passwordToggle = findViewById<ImageView>(R.id.passwordToggle)
+
+        var isPasswordVisible = false
+        passwordToggle.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                passwordEditText.inputType = android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                passwordToggle.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+            } else {
+                passwordEditText.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                passwordToggle.setImageResource(android.R.drawable.ic_menu_view)
+            }
+            passwordEditText.setSelection(passwordEditText.text.length)
+        }
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
