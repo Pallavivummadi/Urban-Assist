@@ -14,7 +14,7 @@ const capabilities = {
   platformName: "Android",
   "appium:deviceName": "Pixel_7",
   "appium:automationName": "UiAutomator2",
-  "appium:app": "C:\\Users\\palla\\AndroidStudioProjects\\MyApplication\\app\\build\\outputs\\apk\\debug\\app-debug.apk",
+  "appium:app": process.env.APK_PATH || "C:\\Users\\palla\\AndroidStudioProjects\\MyApplication\\app\\build\\outputs\\apk\\debug\\app-debug.apk",
   "appium:noReset": false,
   "appium:fullReset": false,
   "appium:newCommandTimeout": 600,
