@@ -62,7 +62,7 @@ jobs:
 
   appium_tests:
     name: Appium Mobile Tests Driver
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -90,10 +90,6 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      - name: Start Appium Server
-        working-directory: appium-tests
-        run: npx appium &
-
       - name: Run Android Emulator and Execute Tests
         uses: ReactiveCircus/android-emulator-runner@v2
         with:
@@ -105,9 +101,19 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            echo "Starting Appium Server..."
+            cd appium-tests
+            npx appium --port 4723 &
+            # Wait for port 4723 to respond using a curl loop
+            for i in {1..30}; do
+              if curl -s http://127.0.0.1:4723/status > /dev/null; then
+                echo "Appium Server is running!"
+                break
+              fi
+              sleep 1
+            done
             echo "Emulator started successfully. Running tests..."
             export APK_PATH="${GITHUB_WORKSPACE}/app/build/outputs/apk/debug/app-debug.apk"
-            cd appium-tests
             npm test
 
       - name: Upload Appium Excel Report

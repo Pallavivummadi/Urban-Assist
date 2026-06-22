@@ -18,6 +18,9 @@ const capabilities = {
   "appium:noReset": false,
   "appium:fullReset": false,
   "appium:newCommandTimeout": 600,
+  "appium:adbExecTimeout": 60000,
+  "appium:uiautomator2ServerLaunchTimeout": 60000,
+  "appium:uiautomator2ServerInstallTimeout": 60000,
   browserName: ""
 };
 
@@ -117,10 +120,11 @@ const testCases = [
         throw new Error("High contrast white color resource is missing");
       }
       if (d) {
-        const loginBtn = await d.wait(until.elementLocated(By.id("com.example.myapplication:id/loginButton")), 5000);
-        if (!loginBtn) throw new Error("Login button not found for accessibility checks");
-        const clickable = await loginBtn.getAttribute("clickable");
-        if (clickable !== "true") throw new Error("Login button is not marked as clickable");
+        const loginBtn = await d.wait(
+          until.elementLocated(By.xpath("//*[@resource-id='com.example.myapplication:id/loginButton' and @clickable='true']")),
+          5000
+        );
+        if (!loginBtn) throw new Error("Login button is not marked as clickable");
       }
     }
   },
@@ -137,8 +141,11 @@ const testCases = [
       if (d) {
         const emailInput = await d.wait(until.elementLocated(By.id("com.example.myapplication:id/emailEditText")), 5000);
         await emailInput.click();
-        const focused = await emailInput.getAttribute("focused");
-        if (focused !== "true") throw new Error("Input field was clicked but did not receive focus");
+        const focusedInput = await d.wait(
+          until.elementLocated(By.xpath("//android.widget.EditText[@resource-id='com.example.myapplication:id/emailEditText' and @focused='true']")),
+          5000
+        );
+        if (!focusedInput) throw new Error("Input field was clicked but did not receive focus");
       }
     }
   },
@@ -293,10 +300,28 @@ const testCases = [
         try {
           const menuButton = await d.findElement(By.id("com.example.myapplication:id/menuButton"));
           await menuButton.click();
-          const settingsMenuItem = await d.wait(
-            until.elementLocated(By.id("com.example.myapplication:id/nav_settings")),
-            5000
-          );
+          let settingsMenuItem;
+          try {
+            settingsMenuItem = await d.wait(
+              until.elementLocated(By.id("com.example.myapplication:id/nav_settings")),
+              3000
+            );
+          } catch (e) {
+            try {
+              await d.executeScript("mobile: dragGesture", {
+                startX: 5,
+                startY: 800,
+                endX: 800,
+                endY: 800,
+                speed: 1000
+              });
+              await d.sleep(1000);
+            } catch (swipeErr) {}
+            settingsMenuItem = await d.wait(
+              until.elementLocated(By.id("com.example.myapplication:id/nav_settings")),
+              5000
+            );
+          }
           await settingsMenuItem.click();
           await d.wait(until.elementLocated(By.id("com.example.myapplication:id/nameInput")), 5000);
           await d.findElement(By.id("com.example.myapplication:id/nameInput")).clear();

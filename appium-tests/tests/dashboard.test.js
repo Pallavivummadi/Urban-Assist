@@ -30,9 +30,11 @@ async function runDashboardTest(driver, testState) {
   ];
 
   for (const act of actions) {
-    const el = await driver.findElement(By.id(`${pkg}/${act}`));
-    const isDisplayed = await el.isDisplayed();
-    if (!isDisplayed) {
+    const el = await driver.wait(
+      until.elementLocated(By.xpath(`//*[@resource-id='${pkg}/${act}' and @displayed='true']`)),
+      5000
+    );
+    if (!el) {
       throw new Error(`Action item ${act} is not displayed on Dashboard`);
     }
   }

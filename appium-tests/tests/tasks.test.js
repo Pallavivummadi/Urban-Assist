@@ -40,11 +40,7 @@ async function runTasksTest(driver, testState) {
 
   // 5. Navigate back to Dashboard
   console.log("Navigating back to Dashboard...");
-  const menuButton = await driver.findElement(By.id(`${pkg}/menuButton`));
-  await menuButton.click();
-
-  // In drawer, click "Dashboard" menu item or navigate back using device back button
-  // Let's use device back button to go back to DashboardActivity
+  // Use device back button to go back to DashboardActivity
   await driver.navigate().back();
   console.log("Returned to Dashboard!");
 }

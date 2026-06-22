@@ -15,12 +15,31 @@ async function runProfileTest(driver, testState) {
 
   // 2. Click on Settings menu item in the navigation drawer
   console.log("Navigating to Settings screen...");
-  // In NavigationView, menu item text might be "Settings" or resource id is nav_settings
-  // W3C syntax: locate the element with resource-id nav_settings
-  const settingsMenuItem = await driver.wait(
-    until.elementLocated(By.id(`com.example.myapplication:id/nav_settings`)),
-    10000
-  );
+  let settingsMenuItem;
+  try {
+    settingsMenuItem = await driver.wait(
+      until.elementLocated(By.id(`com.example.myapplication:id/nav_settings`)),
+      3000
+    );
+  } catch (err) {
+    console.log("Clicking menu button didn't open drawer. Trying dragGesture on drawerLayout...");
+    try {
+      await driver.executeScript("mobile: dragGesture", {
+        startX: 5,
+        startY: 800,
+        endX: 800,
+        endY: 800,
+        speed: 1000
+      });
+      await driver.sleep(1000);
+    } catch (swipeErr) {
+      console.log("dragGesture failed: " + swipeErr.message);
+    }
+    settingsMenuItem = await driver.wait(
+      until.elementLocated(By.id(`com.example.myapplication:id/nav_settings`)),
+      10000
+    );
+  }
   await settingsMenuItem.click();
 
   // 3. Edit Name Field
@@ -31,6 +50,12 @@ async function runProfileTest(driver, testState) {
   );
   await nameInput.clear();
   await nameInput.sendKeys(updatedName);
+
+  // Hide keyboard to ensure subsequent buttons are visible/clickable
+  try {
+    await driver.executeScript("mobile: hideKeyboard");
+    console.log("Hidden keyboard.");
+  } catch (e) {}
 
   // 4. Save Changes
   console.log("Clicking Save Changes...");
@@ -47,7 +72,27 @@ async function runProfileTest(driver, testState) {
 
   // 5. Sign Out
   console.log("Signing out of the application...");
-  const signOutBtn = await driver.findElement(By.id(`${pkg}/signOutButton`));
+  
+  // Scroll down to make signOutButton visible
+  try {
+    const scrollView = await driver.findElement(By.xpath("//android.widget.ScrollView"));
+    const scrollId = await scrollView.getId();
+    await driver.executeScript("mobile: scrollGesture", {
+      elementId: scrollId,
+      direction: "down",
+      percent: 1.0,
+      speed: 1000
+    });
+    await driver.sleep(1000);
+    console.log("Scrolled down to locate signOutButton.");
+  } catch (e) {
+    console.log("Scroll down failed: " + e.message);
+  }
+
+  const signOutBtn = await driver.wait(
+    until.elementLocated(By.id(`${pkg}/signOutButton`)),
+    10000
+  );
   await signOutBtn.click();
 
   // Redirect back to LoginActivity

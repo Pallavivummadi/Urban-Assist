@@ -12,12 +12,22 @@ async function runAuthTest(driver, testState) {
 
   // 1. Sign Up Flow
   console.log(`Navigating to RegisterActivity...`);
-  // Click on "registerTextView" in LoginActivity to go to RegisterActivity
-  const registerText = await driver.wait(
-    until.elementLocated(By.id(`${pkg}/registerTextView`)),
-    10000
-  );
-  await registerText.click();
+  try {
+    // Check if starting from LandingActivity
+    const getStartedBtn = await driver.wait(
+      until.elementLocated(By.id(`${pkg}/getStartedButton`)),
+      5000
+    );
+    await getStartedBtn.click();
+    console.log("Clicked getStartedButton on LandingActivity");
+  } catch (e) {
+    console.log("getStartedButton not found or not clickable on LandingActivity, trying registerTextView on LoginActivity...");
+    const registerText = await driver.wait(
+      until.elementLocated(By.id(`${pkg}/registerTextView`)),
+      10000
+    );
+    await registerText.click();
+  }
 
   console.log(`Filling Registration Form...`);
   await driver.wait(until.elementLocated(By.id(`${pkg}/nameEditText`)), 5000);
