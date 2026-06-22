@@ -62,7 +62,7 @@ jobs:
 
   appium_tests:
     name: Appium Mobile Tests Driver
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -155,6 +155,7 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+        continue-on-error: true
 
   generate_report:
     name: Generate UrbanAssist Test Report
