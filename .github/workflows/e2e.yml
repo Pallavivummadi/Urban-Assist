@@ -6,20 +6,12 @@ on:
   pull_request:
     branches: [ main, master, dev, development ]
 
-# Required permissions for deploying GitHub Pages directly from the pipeline
 permissions:
   contents: write
-  pages: write
-  id-token: write
-
-# Ensure single simultaneous deployment to avoid collisions
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   website_tests:
-    name: Selenium — Website Tests (300)
+    name: Selenium — Website Tests (450)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -42,11 +34,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: selenium-web-report
-          path: selenium-tests/results/results-website.json
+          path: |
+            selenium-tests/results/results-website.json
+            selenium-tests/results/selenium-web-report.xlsx
           retention-days: 1
 
   android_tests:
-    name: Appium — Android Tests (300)
+    name: Appium — Android Tests (450)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -69,11 +63,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: appium-android-report
-          path: selenium-tests/results/results-android.json
+          path: |
+            selenium-tests/results/results-android.json
+            selenium-tests/results/appium-android-report.xlsx
           retention-days: 1
 
   api_tests:
-    name: Unit Tests — API (300)
+    name: Unit Tests — API (450)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -96,11 +92,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: unit-test-report
-          path: selenium-tests/results/results-api.json
+          path: |
+            selenium-tests/results/results-api.json
+            selenium-tests/results/unit-test-report.xlsx
           retention-days: 1
 
   validation_tests:
-    name: Validation Tests (300)
+    name: Validation Tests (450)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -123,11 +121,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: validation-test-report
-          path: selenium-tests/results/results-validation.json
+          path: |
+            selenium-tests/results/results-validation.json
+            selenium-tests/results/validation-test-report.xlsx
           retention-days: 1
 
   deployment_tests:
-    name: Deployment Status (300)
+    name: Deployment Status (450)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -150,11 +150,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: deployment-test-report
-          path: selenium-tests/results/results-deployment.json
+          path: |
+            selenium-tests/results/results-deployment.json
+            selenium-tests/results/deployment-test-report.xlsx
           retention-days: 1
 
   performance_tests:
-    name: Load Testing — Performance (300)
+    name: Load Testing — Performance (450)
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -177,16 +179,15 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: load-test-report
-          path: selenium-tests/results/results-performance.json
+          path: |
+            selenium-tests/results/results-performance.json
+            selenium-tests/results/load-test-report.xlsx
           retention-days: 1
 
   compile_and_deploy:
     name: Compile Master Report & Deploy
     needs: [website_tests, android_tests, api_tests, validation_tests, deployment_tests, performance_tests]
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -242,23 +243,9 @@ jobs:
       - name: Run Master Compile Report Script
         run: node selenium-tests/compile-master-report.js
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        continue-on-error: true
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist-report
-
       - name: Upload Full E2E Report
         uses: actions/upload-artifact@v4
         with:
           name: full-e2e-report
           path: dist-report
           retention-days: 7
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        continue-on-error: true

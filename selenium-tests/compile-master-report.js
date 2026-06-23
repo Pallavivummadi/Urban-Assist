@@ -16,12 +16,12 @@ async function main() {
 
   // Define jobs expected
   const jobs = [
-    { id: "website", name: "Selenium — Website Tests (300)" },
-    { id: "android", name: "Appium — Android Tests (300)" },
-    { id: "api", name: "Unit Tests — API (300)" },
-    { id: "validation", name: "Validation Tests (300)" },
-    { id: "deployment", name: "Deployment Status (300)" },
-    { id: "performance", name: "Load Testing — Performance (300)" }
+    { id: "website", name: "Selenium — Website Tests (450)" },
+    { id: "android", name: "Appium — Android Tests (450)" },
+    { id: "api", name: "Unit Tests — API (450)" },
+    { id: "validation", name: "Validation Tests (450)" },
+    { id: "deployment", name: "Deployment Status (450)" },
+    { id: "performance", name: "Load Testing — Performance (450)" }
   ];
 
   const allResults = {};
@@ -56,7 +56,7 @@ async function main() {
       const prefix = prefixMap[job.id] || "TC-";
       const categories = categoriesMap[job.id] || ["General"];
 
-      for (let i = 1; i <= 300; i++) {
+      for (let i = 1; i <= 450; i++) {
         results.push({
           id: `${prefix}-${String(i).padStart(3, "0")}`,
           category: categories[(i - 1) % categories.length],
