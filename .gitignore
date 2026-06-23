@@ -16,5 +16,10 @@ local.properties
 node_modules/
 **/node_modules/
 **/build/
+
 **/*.xlsx
+
+# Test report artifacts
+dist-report/
+selenium-tests/results/
 

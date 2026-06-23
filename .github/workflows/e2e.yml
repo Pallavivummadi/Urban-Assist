@@ -1,0 +1,255 @@
+name: E2E Pipeline CI
+
+on:
+  push:
+    branches: [ main, master, dev, development ]
+  pull_request:
+    branches: [ main, master, dev, development ]
+
+# Required permissions for deploying GitHub Pages directly from the pipeline
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Ensure single simultaneous deployment to avoid collisions
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  website_tests:
+    name: Selenium — Website Tests (300)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Execute Website Tests
+        working-directory: selenium-tests
+        run: node run-job-tests.js --job=website
+
+      - name: Upload Website Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-website
+          path: selenium-tests/results/results-website.json
+          retention-days: 1
+
+  android_tests:
+    name: Appium — Android Tests (300)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Execute Android Tests
+        working-directory: selenium-tests
+        run: node run-job-tests.js --job=android
+
+      - name: Upload Android Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-android
+          path: selenium-tests/results/results-android.json
+          retention-days: 1
+
+  api_tests:
+    name: Unit Tests — API (300)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Execute API Tests
+        working-directory: selenium-tests
+        run: node run-job-tests.js --job=api
+
+      - name: Upload API Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-api
+          path: selenium-tests/results/results-api.json
+          retention-days: 1
+
+  validation_tests:
+    name: Validation Tests (300)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Execute Validation Tests
+        working-directory: selenium-tests
+        run: node run-job-tests.js --job=validation
+
+      - name: Upload Validation Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-validation
+          path: selenium-tests/results/results-validation.json
+          retention-days: 1
+
+  deployment_tests:
+    name: Deployment Status (300)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Execute Deployment Tests
+        working-directory: selenium-tests
+        run: node run-job-tests.js --job=deployment
+
+      - name: Upload Deployment Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-deployment
+          path: selenium-tests/results/results-deployment.json
+          retention-days: 1
+
+  performance_tests:
+    name: Load Testing — Performance (300)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Execute Performance Tests
+        working-directory: selenium-tests
+        run: node run-job-tests.js --job=performance
+
+      - name: Upload Performance Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-performance
+          path: selenium-tests/results/results-performance.json
+          retention-days: 1
+
+  compile_and_deploy:
+    name: Compile Master Report & Deploy
+    needs: [website_tests, android_tests, api_tests, validation_tests, deployment_tests, performance_tests]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: selenium-tests
+        run: npm install
+
+      - name: Ensure Results Folder Exists
+        run: mkdir -p selenium-tests/results
+
+      - name: Download Website Results
+        uses: actions/download-artifact@v4
+        with:
+          name: results-website
+          path: selenium-tests/results
+
+      - name: Download Android Results
+        uses: actions/download-artifact@v4
+        with:
+          name: results-android
+          path: selenium-tests/results
+
+      - name: Download API Results
+        uses: actions/download-artifact@v4
+        with:
+          name: results-api
+          path: selenium-tests/results
+
+      - name: Download Validation Results
+        uses: actions/download-artifact@v4
+        with:
+          name: results-validation
+          path: selenium-tests/results
+
+      - name: Download Deployment Results
+        uses: actions/download-artifact@v4
+        with:
+          name: results-deployment
+          path: selenium-tests/results
+
+      - name: Download Performance Results
+        uses: actions/download-artifact@v4
+        with:
+          name: results-performance
+          path: selenium-tests/results
+
+      - name: Run Master Compile Report Script
+        run: node selenium-tests/compile-master-report.js
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-report
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
