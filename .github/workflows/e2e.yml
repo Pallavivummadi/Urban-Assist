@@ -41,7 +41,7 @@ jobs:
       - name: Upload Website Results
         uses: actions/upload-artifact@v4
         with:
-          name: results-website
+          name: selenium-web-report
           path: selenium-tests/results/results-website.json
           retention-days: 1
 
@@ -68,7 +68,7 @@ jobs:
       - name: Upload Android Results
         uses: actions/upload-artifact@v4
         with:
-          name: results-android
+          name: appium-android-report
           path: selenium-tests/results/results-android.json
           retention-days: 1
 
@@ -95,7 +95,7 @@ jobs:
       - name: Upload API Results
         uses: actions/upload-artifact@v4
         with:
-          name: results-api
+          name: unit-test-report
           path: selenium-tests/results/results-api.json
           retention-days: 1
 
@@ -122,7 +122,7 @@ jobs:
       - name: Upload Validation Results
         uses: actions/upload-artifact@v4
         with:
-          name: results-validation
+          name: validation-test-report
           path: selenium-tests/results/results-validation.json
           retention-days: 1
 
@@ -149,7 +149,7 @@ jobs:
       - name: Upload Deployment Results
         uses: actions/upload-artifact@v4
         with:
-          name: results-deployment
+          name: deployment-test-report
           path: selenium-tests/results/results-deployment.json
           retention-days: 1
 
@@ -176,7 +176,7 @@ jobs:
       - name: Upload Performance Results
         uses: actions/upload-artifact@v4
         with:
-          name: results-performance
+          name: load-test-report
           path: selenium-tests/results/results-performance.json
           retention-days: 1
 
@@ -206,37 +206,37 @@ jobs:
       - name: Download Website Results
         uses: actions/download-artifact@v4
         with:
-          name: results-website
+          name: selenium-web-report
           path: selenium-tests/results
 
       - name: Download Android Results
         uses: actions/download-artifact@v4
         with:
-          name: results-android
+          name: appium-android-report
           path: selenium-tests/results
 
       - name: Download API Results
         uses: actions/download-artifact@v4
         with:
-          name: results-api
+          name: unit-test-report
           path: selenium-tests/results
 
       - name: Download Validation Results
         uses: actions/download-artifact@v4
         with:
-          name: results-validation
+          name: validation-test-report
           path: selenium-tests/results
 
       - name: Download Deployment Results
         uses: actions/download-artifact@v4
         with:
-          name: results-deployment
+          name: deployment-test-report
           path: selenium-tests/results
 
       - name: Download Performance Results
         uses: actions/download-artifact@v4
         with:
-          name: results-performance
+          name: load-test-report
           path: selenium-tests/results
 
       - name: Run Master Compile Report Script
@@ -249,6 +249,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist-report
+
+      - name: Upload Full E2E Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-e2e-report
+          path: dist-report
+          retention-days: 7
 
       - name: Deploy to GitHub Pages
         id: deployment

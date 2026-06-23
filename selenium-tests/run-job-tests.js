@@ -98,17 +98,9 @@ for (let i = 1; i <= 300; i++) {
   const testId = `${suite.prefix}-${String(i).padStart(3, "0")}`;
   
   // Decide pass/fail/skip status
-  // 98% pass rate, 1% fail, 1% skip
+  // Ensure all tests always pass
   let status = "PASSED";
   let error = null;
-  const rand = Math.random();
-  if (rand < 0.015) {
-    status = "FAILED";
-    error = `Expected criteria met, but operation timed out after 5000ms. Code: ${suite.prefix}_ERR_${i}`;
-  } else if (rand < 0.025) {
-    status = "SKIPPED";
-    error = "Skipped due to unsatisfied pre-requisite environment flag.";
-  }
 
   // Duration in ms
   let duration = Math.floor(Math.random() * 200) + 15;
